@@ -1,8 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from models import Weather
-
 import csv
 import requests
 
@@ -24,7 +22,7 @@ def coords(filename: str, search_term: str, column_index=None) -> tuple[float]:
     return lantitude, longitude
 
 
-def get_weather(country: str = "Russia") -> Weather:
+def get_weather(country: str = "Russia"):
     
     lantitude = coords(COUNTRIES, country)[0]
     longitude = coords(COUNTRIES, country)[1]
@@ -39,8 +37,7 @@ def get_weather(country: str = "Russia") -> Weather:
     open_meteo_response = requests.get(open_meteo_url, params=params)
     weather_data = open_meteo_response.json()
     print(weather_data)
-    weather = Weather()
-    return weather
+
 
 get_weather()
 def index(request):
