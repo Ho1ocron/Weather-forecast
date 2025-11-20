@@ -1,3 +1,5 @@
+# TODO: fix wront weather render
+
 # Django project
 
 1. Starting the project
@@ -17,3 +19,4 @@
     ```bash
     python manage.py runserver
     ```
+
