@@ -3,7 +3,7 @@ from datetime import datetime
 
 from .processor import get_citys_coords
 from .models import Weather
-from settings import API_URL, WEATHER_CODES
+from forecast.settings import API_URL, WEATHER_CODES
 
 
 async def serializer(key: str, value: str) -> datetime | float | str:
