@@ -45,3 +45,5 @@ Thumbs.db
 *.bak
 .vscode
 .sqlite3
+.sqlite
+.cache
