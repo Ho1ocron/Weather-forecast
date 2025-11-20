@@ -10,7 +10,7 @@ async def main() -> None:
     pprint(await get_weather())
 
 
-async def index(request):
+async def index(request) -> HttpResponse:
     weather_data = None
     selected_city = request.POST.get('city', '')
 
