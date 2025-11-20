@@ -11,19 +11,26 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from ast import literal_eval
+from os import getenv
+from dotenv import load_dotenv
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+DOTENV_PATH = BASE_DIR / '.env'
+
+if DOTENV_PATH.exists():
+    load_dotenv(DOTENV_PATH)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-31cs$)2caagh-927ja+&h2qzhkz$%2s6$&#068kpw6h9we=%@9'
-
+SECRET_KEY = getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = literal_eval(getenv("DEBUG"))
 
 ALLOWED_HOSTS = []
 
@@ -120,3 +127,23 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CITIES = [
+    "Moscow", 
+    "Saint Petersburg", 
+    "Novosibirsk", 
+    "Yekaterinburg", 
+    "Kazan", 
+    "Kursk", 
+    "Nordvik", 
+    "Perm", 
+    "Nizhnevartovsk", 
+    "Murmansk", 
+    "Magadan", 
+    "Vladivostok", 
+    "Chelyabinsk", 
+    "Pervouralsk", 
+    "Krasnoufimsk", 
+    "Goryachiy Klyuch", 
+    "Surgut",
+]

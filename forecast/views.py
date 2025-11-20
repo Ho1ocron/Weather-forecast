@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from .data import get_weather
+from .settings import CITIES
 
 
 async def main() -> None:
@@ -10,7 +11,6 @@ async def main() -> None:
 
 
 async def index(request):
-    cities = ["Moscow", "Saint Petersburg", "Novosibirsk", "Yekaterinburg", "Kazan", "Kursk", "Nordvik", "Perm", "Nizhnevartovsk", "Murmansk", "Magadan", "Vladivostok", "Chelyabinsk", "Pervouralsk", "Krasnoufimsk", "Goryachiy Klyuch", "Surgut"]
     weather_data = None
     selected_city = request.POST.get('city', '')
 
@@ -19,7 +19,7 @@ async def index(request):
         weather_data = await get_weather(selected_city)
             
     context = {
-        'cities': cities,
+        'cities': CITIES,
         'weather_data': weather_data,
         'selected_city': selected_city
     }
