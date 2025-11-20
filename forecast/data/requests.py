@@ -56,6 +56,8 @@ async def get_weather(
     name: str= "Yekaterinburg", 
     url: str = "https://api.open-meteo.com/v1/forecast"
 ) -> Weather | None:
+    if name == "":
+        return None
     lantitude, longitude = await get_citys_coords(name)
     params = {
         "latitude": lantitude,
@@ -65,14 +67,16 @@ async def get_weather(
 
     async with AsyncClient() as client:
         response = await client.get(url, params=params)
-        response = response.json()
-        weather = Weather(*[await serializer(key, value) for key, value in response["current_weather"].items()])
-
-        print(weather.temperature)
+        if response.status_code != 200:
+            return None
+        
+        forecast: dict[str, dict[str, str]] = response.json()
+        weather = Weather(*[await serializer(key, value) for key, value in forecast["current_weather"].items()])
+        return weather
 
 
 if __name__ == "__main__": 
-    run(get_weather("Kursk"))
+    print(run(get_weather()))
 
     
 # async def fetch_url(url, client=None):
