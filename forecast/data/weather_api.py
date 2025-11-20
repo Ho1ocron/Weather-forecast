@@ -1,6 +1,5 @@
 from httpx import AsyncClient
 from asyncio import run, gather
-from pprint import pprint
 from datetime import datetime
 
 from processor import get_citys_coords
@@ -78,4 +77,5 @@ async def get_weather(
 
 
 if __name__ == "__main__":
-    print(run(get_weather()))
+    from pprint import pprint
+    pprint(run(get_weather()))
