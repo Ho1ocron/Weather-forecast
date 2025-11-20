@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from data import get_weather
+from .data import get_weather
 
 
 async def main() -> None:

@@ -11,3 +11,9 @@
     ```bash
     python project/manage.py startapp myapp
     ```
+
+3. Starting the server
+
+    ```bash
+    python manage.py runserver
+    ```
