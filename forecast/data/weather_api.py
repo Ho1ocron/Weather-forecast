@@ -1,5 +1,6 @@
 from httpx import AsyncClient
 from datetime import datetime
+from pprint import pprint
 
 from .processor import get_citys_coords
 from .models import Weather
@@ -7,17 +8,18 @@ from forecast.settings import API_URL, WEATHER_CODES
 
 
 async def serializer(key: str, value: str) -> datetime | float | str:
-    if key == "time":
-        return datetime.fromisoformat(value)
-    elif key == "weathercode":
-        return WEATHER_CODES[int(value)]
-    else:
-        try:
-            return float(value)
-        except Exception as e:
-            print(e)
-            print(key, value)
-            return 0.0
+    match key:
+        case "time":
+            return datetime.fromisoformat(value)
+        case "weathercode":
+            return WEATHER_CODES[int(value)]
+        case _:
+            try:
+                return float(value)
+            except Exception as e:
+                print(e)
+                print(key, value)
+                return 0.0
 
 
 async def get_weather(
@@ -37,6 +39,7 @@ async def get_weather(
 
     async with AsyncClient() as client:
         response = await client.get(url, params=params)
+        pprint(response.json())
         if response.status_code != 200:
             return None
 

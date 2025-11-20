@@ -120,7 +120,7 @@
             <p><strong>Condition:</strong> {{ weather_data.weathercode }}</p>
             <p><strong>Wind Speed:</strong> {{ weather_data.windspeed }} km/h</p>
             <p><strong>Wind Direction:</strong> {{ weather_data.winddirection }}°</p>
-            <p><strong>Is Day:</strong> {% if weather_data.is_day %}Yes{% else %}No{% endif %}</p>
+            <p><strong>Day time:</strong> {% if weather_data.is_day %}Day{% else %}Night{% endif %}</p>
             <p><strong>Last Updated:</strong> {{ weather_data.time }}</p>
         </div>
 
