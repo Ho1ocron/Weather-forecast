@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UrFU Weather</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+        .weather-container {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        select, button {
+            padding: 10px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Select a Russian City for Weather</h1>
+
+    <form method="POST" action="{% url 'index' %}">
+        {% csrf_token %}
+        <label for="city-select">Choose a city:</label>
+        <select name="city" id="city-select">
+            <option value="">--Please choose a city--</option>
+            {% for city in cities %}
+                <option value="{{ city }}" {% if selected_city == city %} selected {% endif %}>{{ city }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Get Weather</button>
+    </form>
+
+    {% if weather_data %}
+        <div class="weather-container">
+            <h2>Weather in {{ selected_city }}</h2>
+            <p><strong>Temperature:</strong> {{ weather_data.temperature }}°C</p>
+            <p><strong>Condition:</strong> {{ weather_data.weathercode }}</p>
+            <p><strong>Wind Speed:</strong> {{ weather_data.windspeed }} km/h</p>
+            <p><strong>Wind Direction:</strong> {{ weather_data.winddirection }}°</p>
+            <p><strong>Is Day:</strong> {% if weather_data.is_day %}Yes{% else %}No{% endif %}</p>
+            <p><strong>Last Updated:</strong> {{ weather_data.time }}</p>
+        </div>
+    {% elif selected_city %}
+        <p>Could not retrieve weather data for {{ selected_city }}.</p>
+    {% endif %}
+
+</body>
+</html>
