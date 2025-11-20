@@ -8,6 +8,6 @@ class Weather:
     is_day: float
     temperature: float
     time: datetime
-    weathercode: str # Wether code will be translated in string name instead of code
+    weathercode: str # Wether code will be translated into string name instead of code
     winddirection: float
     windspeed: float
