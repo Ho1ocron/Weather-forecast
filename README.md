@@ -1,6 +1,6 @@
 # UrFU homework
 
-A simple weather forecast website made with **Django** and **Open-Meteo** for the my home assignment.
+A simple weather forecast website made with **Django** and **Open-Meteo** for my home assignment.
 
 ## Python set-up
 
