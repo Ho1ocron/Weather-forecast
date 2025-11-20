@@ -3,37 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <title>UrFU Weather</title>
+
     <style>
         body {
-            font-family: sans-serif;
-            margin: 20px;
+            margin: 0;
+            padding: 0;
+            background-color: #141416;
+            font-family: "Inter", sans-serif;
+            color: #ddd;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
+
+        h1 {
+            margin-top: 40px;
+            font-size: 42px;
+            font-weight: 700;
+            color: #ff774d;
+            text-align: center;
+        }
+
+        form {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        label {
+            font-size: 18px;
+            color: #ccc;
+        }
+
+        select {
+            width: 260px;
+            padding: 10px 14px;
+            background-color: #1d1e20;
+            color: #eee;
+            border: 1px solid #333;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 18px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button[type="submit"] {
+            background-color: #ff5370;
+            color: #fff;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #ff6f88;
+        }
+
         .weather-container {
-            margin-top: 20px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
+            margin-top: 40px;
+            width: 420px;
+            padding: 25px;
+            border-radius: 14px;
+            background-color: #1b1c1e;
+            border: 1px solid #2a2b2d;
+            box-shadow: 0 0 12px rgba(255, 95, 109, 0.15);
         }
-        select, button {
-            padding: 10px;
-            margin-right: 10px;
-            border-radius: 5px;
+
+        .weather-container h2 {
+            margin-bottom: 20px;
+            color: #ff774d;
+            font-size: 26px;
+        }
+
+        .weather-container p {
+            margin: 6px 0;
+            font-size: 17px;
+            color: #ddd;
+        }
+
+        .error-message {
+            margin-top: 30px;
+            color: #ff6b6b;
+            font-size: 18px;
         }
     </style>
 </head>
+
 <body>
-    <h1>Select a Russian City for Weather</h1>
+    <h1>UrFU Weather</h1>
 
     <form method="POST" action="{% url 'index' %}">
         {% csrf_token %}
         <label for="city-select">Choose a city:</label>
+
         <select name="city" id="city-select">
             <option value="">--Please choose a city--</option>
             {% for city in cities %}
-                <option value="{{ city }}" {% if selected_city == city %} selected {% endif %}>{{ city }}</option>
+                <option value="{{ city }}" {% if selected_city == city %}selected{% endif %}>{{ city }}</option>
             {% endfor %}
         </select>
+
         <button type="submit">Get Weather</button>
     </form>
 
@@ -47,8 +123,9 @@
             <p><strong>Is Day:</strong> {% if weather_data.is_day %}Yes{% else %}No{% endif %}</p>
             <p><strong>Last Updated:</strong> {{ weather_data.time }}</p>
         </div>
+
     {% elif selected_city %}
-        <p>Could not retrieve weather data for {{ selected_city }}.</p>
+        <p class="error-message">Could not retrieve weather data for {{ selected_city }}.</p>
     {% endif %}
 
 </body>
