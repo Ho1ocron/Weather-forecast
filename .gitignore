@@ -13,6 +13,7 @@ env/
 .env/
 venv/
 .venv/
+.env
 lib/
 include/
 bin/
