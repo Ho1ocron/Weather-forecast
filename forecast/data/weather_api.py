@@ -2,8 +2,8 @@ from httpx import AsyncClient
 from asyncio import run, gather
 from datetime import datetime
 
-from processor import get_citys_coords
-from models import Weather
+from .processor import get_citys_coords
+from .models import Weather
 
 
 async def serializer(key: str, value: str) -> datetime | float | str:
