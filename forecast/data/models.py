@@ -12,8 +12,4 @@ class Weather:
     weathercode: str # Wether code will be translated in string name instead of code
     winddirection: float
     windspeed: float
-
-        
-        
-
-        
+    

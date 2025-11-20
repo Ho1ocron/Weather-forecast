@@ -72,7 +72,17 @@ async def get_weather(
             return None
 
         forecast: dict[str, dict[str, str]] = response.json()
-        weather = Weather(*[await serializer(key, value) for key, value in forecast["current_weather"].items()])
+
+        cw = forecast["current_weather"]
+        weather = Weather(
+            interval=0.0,  # Open-Meteo no longer returns "interval", so set fallback
+            is_day=await serializer("is_day", cw["is_day"]),
+            temperature=await serializer("temperature", cw["temperature"]),
+            time=await serializer("time", cw["time"]),
+            weathercode=await serializer("weathercode", cw["weathercode"]),
+            winddirection=await serializer("winddirection", cw["winddirection"]),
+            windspeed=await serializer("windspeed", cw["windspeed"]),
+        )
         return weather
 
 
