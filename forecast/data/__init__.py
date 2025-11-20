@@ -1,1 +1,1 @@
-from data.models import Weather
+from data.weather_api import get_weather
