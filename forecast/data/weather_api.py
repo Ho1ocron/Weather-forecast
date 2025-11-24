@@ -29,17 +29,17 @@ async def get_weather(
     if name == "":
         return None
 
-    lantitude, longitude = await get_citys_coords(name)
+    latitude, longitude = await get_citys_coords(name)
 
     params = {
-        "latitude": lantitude,
+        "latitude": latitude,
         "longitude": longitude,
         "current_weather": True
     }
 
     async with AsyncClient() as client:
         response = await client.get(url, params=params)
-        pprint(response.json())
+        # pprint(response.json())
         if response.status_code != 200:
             return None
 
